@@ -29,20 +29,32 @@
       margin-top: 20px;
       cursor: pointer;
     }
+    #countdown {
+      font-weight: bold;
+      color: #2E7D32;
+    }
   </style>
-</head>
-<body>
-  <div class="success-card">
-    <div class="icon">✓</div>
-    <h1>Payment Successful!</h1>
-    <p>Your premium subscription is now active. Click Next to continue.</p>
-    <button class="btn" onclick="openApp()">Next</button>
-  </div>
-
   <script>
+    // Auto-redirect after page loads (3 seconds)
+    window.onload = function() {
+      var seconds = 3;
+      var countdownElement = document.getElementById("countdown");
+      
+      // Start countdown
+      var interval = setInterval(function() {
+        seconds--;
+        countdownElement.textContent = seconds;
+        
+        if (seconds <= 0) {
+          clearInterval(interval);
+          openApp(); // Automatically open app after countdown
+        }
+      }, 1000);
+    };
+    
     function openApp() {
       // Use specific deep link to the premium scanner
-      window.location.href = 'halalscanner://premium/final';
+      window.location.href = 'halalscanner://premium/activate';
       
       // Fallback - after a delay, if app didn't open
       setTimeout(function() {
@@ -57,5 +69,14 @@
       }, 1000);
     }
   </script>
+</head>
+<body>
+  <div class="success-card">
+    <div class="icon">✓</div>
+    <h1>Payment Successful!</h1>
+    <p>Your premium subscription is now active.</p>
+    <p>Returning to app in <span id="countdown">3</span> seconds...</p>
+    <button class="btn" onclick="openApp()">Return Now</button>
+  </div>
 </body>
 </html>
