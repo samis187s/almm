@@ -35,23 +35,23 @@
   <div class="success-card">
     <div class="icon">✓</div>
     <h1>Payment Successful!</h1>
-    <p>Your premium subscription is now active.</p>
-    <button class="btn" onclick="openApp()">Return to App</button>
+    <p>Your premium subscription is now active. Click Next to continue.</p>
+    <button class="btn" onclick="openApp()">Next</button>
   </div>
 
   <script>
     function openApp() {
-      // Try to open the app with deep link
-      window.location.href = 'halalscanner://premium';
+      // Use specific deep link to the premium scanner
+      window.location.href = 'halalscanner://premium/final';
       
       // Fallback - after a delay, if app didn't open
       setTimeout(function() {
         // If on mobile, try app stores
         if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
           if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            window.location.href = 'https://apps.apple.com/app/your-app-id';
+            window.location.href = 'https://apps.apple.com/app/halal-scanner/id[YOUR-APP-ID]';
           } else {
-            window.location.href = 'https://play.google.com/store/apps/details?id=your.app.package';
+            window.location.href = 'https://play.google.com/store/apps/details?id=com.sami187.halalscanner';
           }
         }
       }, 1000);
